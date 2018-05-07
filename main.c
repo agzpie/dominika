@@ -81,7 +81,7 @@ void push_number(struktura *head_node){      // ZAD 2b:
 void printall(struktura *head_node){     //ZAD3b.
     struktura *current = head_node->next;
     while ( current != NULL){
-        printf("%d", current->value);
+        printf("%d ", current->value);
         current = current->next;
     }
 
@@ -127,10 +127,10 @@ int main (){
     struk = malloc(sizeof(struktura));
 
     while (opcja != 6) {
-    scanf("%d", &opcja);
+        scanf("%d", &opcja);
 
 
-    switch (opcja) {
+             switch (opcja) {
         case 1:
 
             //printf("Podaj rozmiar listy: ");
@@ -146,7 +146,8 @@ int main (){
                 printf("Podaj wartosc: ");
                 scanf("%d", &wartosc);
                 push_last(struk, wartosc);
-            }
+            };
+            printall(struk);
 
             break;
         case 2:
@@ -184,10 +185,13 @@ int main (){
             scanf("%d", &i);
             licz_wyst(struk, i);
             break;
+
+                 case 6:
+                     return 0;
+
         default:
             break;
-    }
+        }
         return 0;
+    }
 }
-
-};
