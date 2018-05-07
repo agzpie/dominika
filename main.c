@@ -5,7 +5,7 @@ typedef struct node{
     int value;
     struct node*next;
 }struktura;
-
+/*
 void push_last(struktura *head_node, int value) {
     if (head_node->next == NULL) {
         // First node with data
@@ -22,13 +22,12 @@ void push_last(struktura *head_node, int value) {
         current->next->value = value;
         current->next->next = NULL;
     }
-}
-/*
+}*/
+
 void push_last(struktura *head_node, int rozmiar){ //ZAD1b.
     if (rozmiar <0) {
         printf("Mniejsze od 0");
-        return -1;
-    }
+    };
     if (rozmiar == 0) {
         if(head_node->next == NULL ){
             head_node->next = malloc(sizeof(struktura));
@@ -62,12 +61,12 @@ void push_last(struktura *head_node, int rozmiar){ //ZAD1b.
             }
             printf("Maksymalny rozmiar: %d\n", rozmiar);
         }
-}*/
+}
 
 void push_number(struktura *head_node){      // ZAD 2b:
     if(head_node->next == NULL ){
         printf("nie jest dobrze");
-    }
+    };
     struktura *current = head_node->next;
     int number;
     while (current->next != NULL) {
@@ -75,7 +74,7 @@ void push_number(struktura *head_node){      // ZAD 2b:
         scanf("%d", &number);
         current->value = number;
         current = current->next;
-    }
+    };
 }
 
 void printall(struktura *head_node){     //ZAD3b.
@@ -83,40 +82,40 @@ void printall(struktura *head_node){     //ZAD3b.
     while ( current != NULL){
         printf("%d ", current->value);
         current = current->next;
-    }
+    };
 
 }
 
 int pop_last(struktura *head_node, int number){ //ZAD4b.
     if (head_node->next == NULL) {
         return -1;
-    }
+    };
     struktura *current = head_node->next;
     struktura *prev_current = head_node;
     while (current->next != NULL){
         prev_current = current;
         current = current->next;
-    }
+    };
     int flaga = 0;
     if (current->value == number) {
         free(prev_current->next);
         prev_current->next = NULL;
         flaga++;
-    }
+    };
     return flaga;
 }
 
 int licz_wyst(struktura *head_node, int i){ //ZAD5b.
     if(head_node->next == NULL ){
         return -1;
-    }
+    };
     int licz = 0;
     struktura *current = head_node->next;
     while ( current != NULL){
         if (current->value == i)
             licz++;
         current = current->next;
-    }
+    };
     return licz;
 }
 
@@ -145,7 +144,7 @@ int main (){
             for (int i=0; i<rozmiar; i++) {
                 printf("Podaj wartosc: ");
                 scanf("%d", &wartosc);
-                push_last(struk, wartosc);
+                push_last(struk, rozmiar);
             };
             printall(struk);
 
@@ -192,6 +191,5 @@ int main (){
         default:
             break;
         }
-        return 0;
     }
 }
