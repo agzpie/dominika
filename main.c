@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int flaga = 0;
+
 typedef struct node{
     int value;
     struct node*next;
@@ -38,71 +40,73 @@ void push_last(struktura *head_node, int rozmiar){ //ZAD1b.
             while (current->next != NULL)
                 current = current->next;
 
-                current->next = malloc(sizeof(struktura));
-                current->next->value = NULL;
-                current->next->next = NULL;
+            current->next = malloc(sizeof(struktura));
+            current->next->value = NULL;
+            current->next->next = NULL;
         }
 
     } else {
-            for(int i=0; i<rozmiar; i++){
-                if(head_node->next == NULL ){
-                    head_node->next = malloc(sizeof(struktura));
-                    head_node->next->value = NULL;
-                    head_node->next->next = NULL;
-                } else {
-                    struktura *current = head_node->next;
-                    while (current->next != NULL)
+        for(int i=0; i<rozmiar; i++){
+            if(head_node->next == NULL ){
+                head_node->next = malloc(sizeof(struktura));
+                head_node->next->value = NULL;
+                head_node->next->next = NULL;
+            } else {
+                struktura *current = head_node->next;
+                while (current->next != NULL)
                     current = current->next;
 
-                    current->next = malloc(sizeof(struktura));
-                    current->next->value = NULL;
-                    current->next->next = NULL;
-                }
+                current->next = malloc(sizeof(struktura));
+                current->next->value = NULL;
+                current->next->next = NULL;
             }
+        }
 
-        }//printf("Maksymalny rozmiar: %d\n", rozmiar);
+    }//printf("Maksymalny rozmiar: %d\n", rozmiar);
 }
 
-void push_number(struktura *head_node){      // ZAD 2b:
+void push_number(struktura *head_node, int rozmiar){      // ZAD 2b:
     if(head_node->next == NULL ){
         printf("nie jest dobrze");
     };
     struktura *current = head_node->next;
     int number;
-    while (current->next != NULL) {
-        //printf("Podaj liczbe: ");
+    for (int i=0; i<rozmiar; i++){
+        //while (current->next != NULL) {
+        printf("Podaj liczbe: ");
         scanf("%d", &number);
         current->value = number;
         current = current->next;
     };
 }
 
-void printall(struktura *head_node){     //ZAD3b.
+void printall(struktura *head_node, int rozmiar){     //ZAD3b.
     struktura *current = head_node->next;
-    while ( current != NULL){
+    for (int i=0; i<rozmiar; i++){
+        //while ( current != NULL){
         printf("%d ", current->value);
         current = current->next;
     };
-
+    printf("\n");
 }
 
-int pop_last(struktura *head_node, int number){ //ZAD4b.
+void pop_last(struktura *head_node, int number, int rozmiar){ //ZAD4b.
     if (head_node->next == NULL) {
-        return -1;
+        printf("nie jest dobrze");
     };
     struktura *current = head_node->next;
     struktura *prev_current = head_node;
-    while (current->next != NULL){
+    for (int i=0; i<(rozmiar-1); i++){
+        //while (current->next != NULL){
         prev_current = current;
         current = current->next;
     };
-    int flaga = 0;
     if (current->value == number) {
-        free(prev_current->next);
+        free(current);
         prev_current->next = NULL;
         flaga++;
     };
-    return flaga;
+    printf("Flaga: %d\n", flaga);
 }
 
 int licz_wyst(struktura *head_node, int i){ //ZAD5b.
@@ -120,77 +124,30 @@ int licz_wyst(struktura *head_node, int i){ //ZAD5b.
 }
 
 
-int main (){
-    printf("Wybierz funkcje, ktora chcesz uzyc:\n\t1. Stworzenie listy\n\t2. Dodanie wartosci do listy\n\t3. Wyswietl liste\n\t4. Usun ostatnia wartosc\n\t5. Liczba wystapien wystepowania liczby\n\t6. EXIT\n");
+int main () {
+    printf("\t1. Stworzenie listy\n\t2. Dodanie wartosci do listy\n\t3. Wyswietl liste\n\t4. Usun ostatnia wartosc\n\t5. Liczba wystapien wystepowania liczby\n\t6. EXIT\n");
     int opcja, rozmiar, wartosc;
     struktura *struk = NULL;
     struk = malloc(sizeof(struktura));
 
-    while (opcja != 6) {
-        scanf("%d", &opcja);
-
-
-             switch (opcja) {
-        case 1:
-
-            //printf("Podaj rozmiar listy: ");
-            //scanf("%d", rozmiar);
-
-
-            if (struk == NULL)
-                return 1;
-            struk->next = NULL;
-            printf("Podaj rozmiar stosu: ");
-            scanf("%d", &rozmiar);
-            for (int i=0; i<rozmiar; i++) {
-                //printf("Podaj wartosc: ");
-                //scanf("%d", &wartosc);
-                push_last(struk, rozmiar);
-            };
-            //printall(struk);
-
-            break;
-        case 2:
-            // struktura *struk = NULL;
-            // struk = malloc(sizeof(struktura));
-            if (struk == NULL)
-                return 1;
-            push_number(struk);
-            break;
-        case 3:
-            //struktura *struk = NULL;
-            //struk = malloc(sizeof(struktura));
-            if (struk == NULL)
-                return 1;
-            printall(struk);
-            break;
-        case 4:
-            //   struktura *struk = NULL;
-            //    struk = malloc(sizeof(struktura));
-            if (struk == NULL)
-                return 1;
-            printf("Podaj wartosc do usuniecia: ");
-            int number;
-            scanf("%d", &number);
-            pop_last(struk, number);
-            break;
-        case 5:
-            //    struktura *struk = NULL;
-            //   struk = malloc(sizeof(struktura));
-            if (struk == NULL)
-                return 1;
-
-            printf("Podaj wartosc do zliczenia: ");
-            int i;
-            scanf("%d", &i);
-            licz_wyst(struk, i);
-            break;
-
-                 case 6:
-                     return 0;
-
-        default:
-            break;
-        }
-    }
+    if (struk == NULL)
+        return 1;
+    struk->next = NULL;
+    printf("Podaj rozmiar stosu: ");
+    scanf("%d", &rozmiar);
+    for (int i = 0; i < rozmiar; i++) {
+        push_last(struk, rozmiar);
+    };
+    printf("Rozmiar listy to: %d\n", rozmiar);
+    push_number(struk, rozmiar);
+    printall(struk, rozmiar);
+    printf("Podaj wartosc do usuniecia: ");
+    int number;
+    scanf("%d", &number);
+    pop_last(struk, number, rozmiar);
+    printall(struk, rozmiar);
+    printf("Podaj wartosc do zliczenia: ");
+    int i;
+    scanf("%d", &i);
+    licz_wyst(struk, i);
 }
