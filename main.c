@@ -59,8 +59,8 @@ void push_last(struktura *head_node, int rozmiar){ //ZAD1b.
                     current->next->next = NULL;
                 }
             }
-            printf("Maksymalny rozmiar: %d\n", rozmiar);
-        }
+
+        }//printf("Maksymalny rozmiar: %d\n", rozmiar);
 }
 
 void push_number(struktura *head_node){      // ZAD 2b:
@@ -70,7 +70,7 @@ void push_number(struktura *head_node){      // ZAD 2b:
     struktura *current = head_node->next;
     int number;
     while (current->next != NULL) {
-        printf("Podaj liczbe: ");
+        //printf("Podaj liczbe: ");
         scanf("%d", &number);
         current->value = number;
         current = current->next;
@@ -119,6 +119,7 @@ int licz_wyst(struktura *head_node, int i){ //ZAD5b.
     return licz;
 }
 
+
 int main (){
     printf("Wybierz funkcje, ktora chcesz uzyc:\n\t1. Stworzenie listy\n\t2. Dodanie wartosci do listy\n\t3. Wyswietl liste\n\t4. Usun ostatnia wartosc\n\t5. Liczba wystapien wystepowania liczby\n\t6. EXIT\n");
     int opcja, rozmiar, wartosc;
@@ -142,11 +143,11 @@ int main (){
             printf("Podaj rozmiar stosu: ");
             scanf("%d", &rozmiar);
             for (int i=0; i<rozmiar; i++) {
-                printf("Podaj wartosc: ");
-                scanf("%d", &wartosc);
+                //printf("Podaj wartosc: ");
+                //scanf("%d", &wartosc);
                 push_last(struk, rozmiar);
             };
-            printall(struk);
+            //printall(struk);
 
             break;
         case 2:
